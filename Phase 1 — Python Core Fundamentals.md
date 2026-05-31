@@ -1781,9 +1781,882 @@ Much faster than searching lists manually.
 2. Frequency Counter
 3. Word Frequency Counter
 4. Character Frequency Counter
+
+
+# 7. Strings
+
+## Definition
+
+A string is an immutable sequence of characters.
+
+```python
+name = "Python"
+```
+
+Strings are used everywhere:
+
+* User input
+* Files
+* APIs
+* JSON
+* URLs
+* Databases
+* AI prompts
+
+---
+
+## Creation
+
+```python
+s = "Python"
+
+s = 'Python'
+
+s = """Multi-line
+String"""
+```
+
+---
+
+## String Immutability
+
+Strings cannot be modified after creation.
+
+Invalid:
+
+```python
+s = "Python"
+
+s[0] = "J"
+```
+
+Error:
+
+```text
+TypeError
+```
+
+Create a new string instead:
+
+```python
+s = "J" + s[1:]
+```
+
+---
+
+## Indexing
+
+Access characters using positions.
+
+```python
+s = "Python"
+
+s[0]
+s[1]
+s[-1]
+s[-2]
+```
+
+| Index | Meaning               |
+| ----- | --------------------- |
+| 0     | First character       |
+| 1     | Second character      |
+| -1    | Last character        |
+| -2    | Second last character |
+
+---
+
+## Slicing
+
+Syntax:
+
+```python
+string[start:end]
+```
+
+End index is excluded.
+
+Examples:
+
+```python
+s[1:4]
+s[:3]
+s[2:]
+s[:]
+s[::-1]
+```
+
+Common Uses:
+
+```python
+s[::-1]
+```
+
+Reverse string.
+
+```python
+s[:]
+```
+
+Copy string.
+
+---
+
+## Iteration
+
+### Preferred
+
+```python
+for ch in s:
+    print(ch)
+```
+
+### Using Index
+
+```python
+for i in range(len(s)):
+    print(s[i])
+```
+
+---
+
+## Membership
+
+```python
+"py" in "python"
+```
+
+```python
+"java" not in "python"
+```
+
+Returns:
+
+```python
+True
+False
+```
+
+---
+
+## Concatenation
+
+Join strings.
+
+```python
+first = "Hello"
+second = "World"
+
+result = first + second
+```
+
+---
+
+## Repetition
+
+```python
+"-" * 20
+```
+
+Output:
+
+```text
+--------------------
+```
+
+---
+
+## String Methods
+
+### lower()
+
+Convert to lowercase.
+
+```python
+s.lower()
+```
+
+---
+
+### upper()
+
+Convert to uppercase.
+
+```python
+s.upper()
+```
+
+---
+
+### capitalize()
+
+First letter uppercase.
+
+```python
+s.capitalize()
+```
+
+---
+
+### title()
+
+Capitalize every word.
+
+```python
+s.title()
+```
+
+---
+
+### strip()
+
+Remove spaces from both ends.
+
+```python
+s.strip()
+```
+
+---
+
+### lstrip()
+
+Remove left spaces.
+
+```python
+s.lstrip()
+```
+
+---
+
+### rstrip()
+
+Remove right spaces.
+
+```python
+s.rstrip()
+```
+
+---
+
+### replace()
+
+Replace text.
+
+```python
+s.replace("a", "x")
+```
+
+---
+
+### split()
+
+Convert string to list.
+
+```python
+text.split()
+```
+
+Example:
+
+```python
+"I love Python".split()
+```
+
+Result:
+
+```python
+['I', 'love', 'Python']
+```
+
+---
+
+### join()
+
+Convert list to string.
+
+```python
+"-".join(words)
+```
+
+Example:
+
+```python
+["A","B","C"]
+```
+
+Result:
+
+```text
+A-B-C
+```
+
+---
+
+### find()
+
+Return first occurrence index.
+
+```python
+s.find("th")
+```
+
+Returns:
+
+```python
+index
+```
+
+or
+
+```python
+-1
+```
+
+if not found.
+
+---
+
+### count()
+
+Count occurrences.
+
+```python
+s.count("a")
+```
+
+---
+
+### startswith()
+
+Check prefix.
+
+```python
+s.startswith("Py")
+```
+
+---
+
+### endswith()
+
+Check suffix.
+
+```python
+s.endswith(".txt")
+```
+
+---
+
+## Character Testing Methods
+
+### isalpha()
+
+Letters only.
+
+```python
+"Python".isalpha()
+```
+
+---
+
+### isdigit()
+
+Digits only.
+
+```python
+"123".isdigit()
+```
+
+---
+
+### isalnum()
+
+Letters or digits.
+
+```python
+"Python123".isalnum()
+```
+
+---
+
+### islower()
+
+All lowercase.
+
+```python
+"python".islower()
+```
+
+---
+
+### isupper()
+
+All uppercase.
+
+```python
+"PYTHON".isupper()
+```
+
+---
+
+### isspace()
+
+Whitespace only.
+
+```python
+"   ".isspace()
+```
+
+---
+
+## ASCII Functions
+
+### ord()
+
+Character → ASCII value
+
+```python
+ord("A")
+```
+
+Result:
+
+```python
+65
+```
+
+---
+
+### chr()
+
+ASCII value → Character
+
+```python
+chr(65)
+```
+
+Result:
+
+```python
+A
+```
+
+---
+
+## String Formatting
+
+### f-Strings (Preferred)
+
+```python
+name = "Ravi"
+age = 20
+
+print(f"{name} is {age} years old")
+```
+
+---
+
+### format()
+
+```python
+print("{} is {}".format(name, age))
+```
+
+---
+
+## Building Strings
+
+### Simple Method
+
+```python
+result += ch
+```
+
+Good for small programs.
+
+---
+
+### Preferred for Large Data
+
+```python
+"".join(chars)
+```
+
+More efficient.
+
+---
+
+# Pythonic Patterns
+
+## Counting Pattern (Important)
+
+Count uppercase and lowercase letters.
+
+```python
+text = "ProGrAmMiNg"
+
+upp = sum(
+    1
+    for ch in text
+    if 'A' <= ch <= 'Z'
+)
+
+low = sum(
+    1
+    for ch in text
+    if 'a' <= ch <= 'z'
+)
+```
+
+Applications:
+
+* Uppercase count
+* Lowercase count
+* Vowel count
+* Digit count
+* Conditional counting
+
+---
+
+## Vowel Count
+
+```python
+vowels = sum(
+    1
+    for ch in text.lower()
+    if ch in "aeiou"
+)
+```
+
+---
+
+## Digit Count
+
+```python
+digits = sum(
+    1
+    for ch in text
+    if ch.isdigit()
+)
+```
+
+---
+
+## Frequency Counter
+
+```python
+freq = {}
+
+for ch in text:
+    freq[ch] = freq.get(ch, 0) + 1
+```
+
+---
+
+# Collection Comparison Table
+
+| Feature     | List            | Tuple      | Set         | Dictionary    |
+| ----------- | --------------- | ---------- | ----------- | ------------- |
+| Syntax      | `[]`            | `()`       | `{}`        | `{key:value}` |
+| Ordered     | Yes             | Yes        | No*         | Yes           |
+| Mutable     | Yes             | No         | Yes         | Yes           |
+| Duplicates  | Yes             | Yes        | No          | Keys No       |
+| Indexing    | Yes             | Yes        | No          | By Key        |
+| Fast Lookup | No              | No         | Yes         | Yes           |
+| Use Case    | General Storage | Fixed Data | Unique Data | Mapping Data  |
+
+* Do not rely on set ordering.
+
+---
+
+# Mutable vs Immutable
+
+## Mutable Objects
+
+Can change after creation.
+
+| Type       |
+| ---------- |
+| list       |
+| set        |
+| dictionary |
+
+Examples:
+
+```python
+nums[0] = 100
+
+s.add(10)
+
+data["age"] = 20
+```
+
+---
+
+## Immutable Objects
+
+Cannot change after creation.
+
+| Type  |
+| ----- |
+| int   |
+| float |
+| bool  |
+| str   |
+| tuple |
+
+Examples:
+
+```python
+s[0] = "A"     # Error
+
+t[0] = 10      # Error
+```
+
+---
+
+# Common Built-in Functions
+
+These work across multiple collections.
+
+| Function     | Purpose             |
+| ------------ | ------------------- |
+| len()        | Count elements      |
+| min()        | Smallest value      |
+| max()        | Largest value       |
+| sum()        | Sum values          |
+| sorted()     | Return sorted copy  |
+| reversed()   | Reverse iterator    |
+| enumerate()  | Index + Value       |
+| zip()        | Combine collections |
+| type()       | Get type            |
+| isinstance() | Type check          |
+| range()      | Generate sequence   |
+
+---
+
+## enumerate()
+
+```python
+for i, value in enumerate(nums):
+    print(i, value)
+```
+
+Used when index and value are both required.
+
+---
+
+## zip()
+
+```python
+for name, mark in zip(names, marks):
+    print(name, mark)
+```
+
+Used to iterate multiple collections together.
+
+---
+
+## sorted()
+
+Returns a new sorted collection.
+
+```python
+sorted(nums)
+```
+
+Original remains unchanged.
+
+---
+
+## reversed()
+
+Returns reverse iterator.
+
+```python
+reversed(nums)
+```
+
+Often converted:
+
+```python
+list(reversed(nums))
+```
+
+---
+
+# Common Beginner Mistakes
+
+## Lists
+
+Wrong:
+
+```python
+nums = []
+
+nums[0] = 10
+```
+
+Correct:
+
+```python
+nums.append(10)
+```
+
+---
+
+## Tuples
+
+Wrong:
+
+```python
+t = (5)
+```
+
+Correct:
+
+```python
+t = (5,)
+```
+
+---
+
+## Sets
+
+Wrong:
+
+```python
+s = {}
+```
+
+Creates dictionary.
+
+Correct:
+
+```python
+s = set()
+```
+
+---
+
+## Dictionaries
+
+Wrong assumption:
+
+```python
+"value" in dict
+```
+
+Checks keys, not values.
+
+---
+
+## Strings
+
+Wrong:
+
+```python
+s[0] = "A"
+```
+
+Strings are immutable.
+
+---
+
+# Recommended Practice Problems
+
+## Lists
+
+1. Reverse List
+2. Second Largest
+3. Frequency Counter
+4. Rotate List
+5. Merge Sorted Lists
+
+---
+
+## Tuples
+
+1. Tuple Unpacking
+2. Variable Swap
+3. Multiple Return Values
+4. Nested Tuple Traversal
+
+---
+
+## Sets
+
+1. Remove Duplicates
+2. Common Elements
+3. Unique Words
+4. Subset Check
+5. Disjoint Check
+
+---
+
+## Dictionaries
+
+1. Frequency Counter
+2. Word Frequency Counter
+3. Character Frequency Counter
+4. Student Marks System
 5. Topper Finder
 
 ---
+
+## Strings
+
+1. Reverse String
+2. Count Vowels
+3. Uppercase/Lowercase Count
+4. Palindrome Check
+5. Character Frequency
+6. First Non-Repeating Character
+
+---
+
+# Phase 1 Completion Checklist
+
+```text
+✓ Variables & Data Types
+✓ Operators
+✓ Control Flow
+✓ Functions
+✓ Recursion
+✓ Lists
+✓ Tuples
+✓ Sets
+✓ Dictionaries
+✓ Strings
+```
+
+---
+
+# What You Can Build Now
+
+Without OOP or frameworks, you can already build:
+
+* CLI Calculator
+* ATM System
+* Student Management System
+* Notes Manager
+* Expense Tracker
+* Contact Book
+* Inventory Tracker
+* Word Frequency Analyzer
+* Quiz Application
+* Library Management (Basic)
+
+You now have the core Python foundation required for:
+
+* Data Structures & Algorithms
+* Intermediate Python
+* Backend Development
+* AI Development
+
+5. Topper Finder
+
+---
+
 
 
 
