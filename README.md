@@ -27,7 +27,7 @@ A structured roadmap for learning Python from beginner level to backend developm
 ## Chapters
 
 * [Phase 0 — Setup + Python Transition](./00-Setup-and-Python-Transition.md)
-* [Phase 1 — Python Core Fundamentals](./01-Python-Core-Fundamentals.md)
+* [Phase 1 — Python Core Fundamentals](https://github.com/AnnaRaghavendra/python-notes/blob/main/Phase%201%20%E2%80%94%20Python%20Core%20Fundamentals.md)
 * [Phase 2 — Problem Solving + DS Basics](./02-Problem-Solving-and-DS-Basics.md)
 * [Phase 3 — Intermediate Python + OOP + Modules](./03-Intermediate-Python-OOP-and-Modules.md)
 * [Phase 4 — Backend Foundations](./04-Backend-Foundations.md)
