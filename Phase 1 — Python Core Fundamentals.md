@@ -658,7 +658,7 @@ Avoid when:
 
 ---
 
-## Phase 1 Progress(part 1)
+## Phase 1 Progress
 
 ```text
 ✓ Variables & Data Types
