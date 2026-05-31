@@ -658,19 +658,1132 @@ Avoid when:
 
 ---
 
-## Phase 1 Progress
+# 6. Collections
+
+Collections store multiple values in a single variable.
+
+Python provides four primary collection types:
+
+| Collection | Ordered | Mutable | Duplicates | Indexing |
+| ---------- | ------- | ------- | ---------- | -------- |
+| List       | Yes     | Yes     | Yes        | Yes      |
+| Tuple      | Yes     | No      | Yes        | Yes      |
+| Set        | No*     | Yes     | No         | No       |
+| Dictionary | Yes     | Yes     | Keys No    | By Key   |
+
+* Do not rely on set ordering.
+
+---
+
+# Mutable vs Immutable
+
+## Mutable
+
+Can be modified after creation.
+
+Examples:
+
+```python
+list
+set
+dictionary
+```
+
+---
+
+## Immutable
+
+Cannot be modified after creation.
+
+Examples:
+
+```python
+int
+float
+bool
+str
+tuple
+```
+
+---
+
+## Tricky Point
+
+```python
+t = ([1,2], [3,4])
+```
+
+Valid:
+
+```python
+t[0].append(5)
+```
+
+Reason:
 
 ```text
-✓ Variables & Data Types
-✓ Operators
-✓ Control Flow
-✓ Functions
-✓ Recursion
-
-Next:
-Collections
-- Lists
-- Tuples
-- Sets
-- Dictionaries
+Tuple itself is immutable.
+Inner lists remain mutable.
 ```
+
+---
+
+# Lists
+
+## Definition
+
+Ordered, mutable collection.
+
+```python
+nums = [10, 20, 30]
+```
+
+---
+
+## Why Lists Matter
+
+Lists are the most commonly used collection in Python.
+
+Used for:
+
+* Data storage
+* Iteration
+* Problem solving
+* APIs
+* AI preprocessing
+
+---
+
+## Creation
+
+```python
+nums = [1,2,3]
+
+data = [1, "hello", True]
+```
+
+Mixed types are allowed.
+
+---
+
+## Indexing
+
+```python
+nums[0]
+nums[1]
+```
+
+---
+
+## Negative Indexing
+
+```python
+nums[-1]
+nums[-2]
+```
+
+| Index | Meaning      |
+| ----- | ------------ |
+| -1    | Last element |
+| -2    | Second last  |
+| -3    | Third last   |
+
+---
+
+## Slicing
+
+Syntax:
+
+```python
+list[start:end]
+```
+
+End index is excluded.
+
+Examples:
+
+```python
+nums[1:4]
+nums[:3]
+nums[2:]
+nums[:]
+nums[::-1]
+```
+
+---
+
+## Iteration
+
+### Preferred
+
+```python
+for item in nums:
+    print(item)
+```
+
+### Using Index
+
+```python
+for i in range(len(nums)):
+    print(nums[i])
+```
+
+Use when index is required.
+
+---
+
+## Nested Lists
+
+```python
+matrix = [
+    [1,2,3],
+    [4,5,6]
+]
+```
+
+Access:
+
+```python
+matrix[1][2]
+```
+
+---
+
+## List Methods
+
+### append()
+
+Add element at end.
+
+```python
+nums.append(100)
+```
+
+---
+
+### insert()
+
+Insert at index.
+
+```python
+nums.insert(1, 50)
+```
+
+---
+
+### remove()
+
+Remove by value.
+
+```python
+nums.remove(20)
+```
+
+---
+
+### pop()
+
+Remove by index and return value.
+
+```python
+nums.pop()
+nums.pop(2)
+```
+
+---
+
+### index()
+
+Return first position.
+
+```python
+nums.index(50)
+```
+
+---
+
+### count()
+
+Count occurrences.
+
+```python
+nums.count(10)
+```
+
+---
+
+### sort()
+
+Sort list in-place.
+
+```python
+nums.sort()
+```
+
+Descending:
+
+```python
+nums.sort(reverse=True)
+```
+
+---
+
+### reverse()
+
+Reverse list in-place.
+
+```python
+nums.reverse()
+```
+
+---
+
+### clear()
+
+Remove all elements.
+
+```python
+nums.clear()
+```
+
+---
+
+### copy()
+
+Create shallow copy.
+
+```python
+nums.copy()
+```
+
+---
+
+## List Comprehension
+
+Pythonic list creation.
+
+Traditional:
+
+```python
+squares = []
+
+for i in range(5):
+    squares.append(i * i)
+```
+
+Pythonic:
+
+```python
+squares = [i*i for i in range(5)]
+```
+
+Conditional:
+
+```python
+evens = [x for x in nums if x % 2 == 0]
+```
+
+---
+
+## Tricky Points
+
+### append() vs insert()
+
+```python
+append()
+```
+
+Always end.
+
+```python
+insert()
+```
+
+Specific position.
+
+---
+
+### remove() vs pop()
+
+```python
+remove(value)
+```
+
+Removes value.
+
+```python
+pop(index)
+```
+
+Removes position.
+
+---
+
+### Empty List
+
+```python
+nums = []
+```
+
+No valid indexes exist.
+
+Use:
+
+```python
+nums.append(value)
+```
+
+not:
+
+```python
+nums[0] = value
+```
+
+---
+
+## Important Built-ins
+
+```python
+len(nums)
+min(nums)
+max(nums)
+sum(nums)
+sorted(nums)
+```
+
+---
+
+## Practice
+
+1. Reverse List
+2. Second Largest Number
+3. Remove Duplicates
+4. Frequency Counter
+5. Rotate List
+6. Merge Sorted Lists
+
+---
+
+# Tuples
+
+## Definition
+
+Ordered, immutable collection.
+
+```python
+point = (10, 20)
+```
+
+---
+
+## Why Tuples Matter
+
+Use tuples when data should not change.
+
+Examples:
+
+* Coordinates
+* RGB values
+* Database rows
+* Function returns
+
+---
+
+## Creation
+
+```python
+t = (1,2,3)
+```
+
+---
+
+## Single Element Tuple
+
+Important:
+
+```python
+t = (5,)
+```
+
+Not:
+
+```python
+t = (5)
+```
+
+Reason:
+
+```text
+Comma creates tuple.
+```
+
+---
+
+## Indexing
+
+```python
+t[0]
+t[-1]
+```
+
+---
+
+## Slicing
+
+```python
+t[1:4]
+```
+
+---
+
+## Iteration
+
+```python
+for item in t:
+    print(item)
+```
+
+---
+
+## Packing
+
+```python
+t = 1,2,3
+```
+
+---
+
+## Unpacking
+
+```python
+a,b,c = (1,2,3)
+```
+
+---
+
+## Variable Swapping
+
+```python
+a,b = b,a
+```
+
+Uses tuple unpacking internally.
+
+---
+
+## Returning Multiple Values
+
+```python
+def calc(a,b):
+    return a+b, a*b
+```
+
+---
+
+## Tuple Methods
+
+### count()
+
+Count occurrences.
+
+```python
+t.count(2)
+```
+
+---
+
+### index()
+
+Find position.
+
+```python
+t.index(3)
+```
+
+---
+
+## Tricky Points
+
+### Immutable
+
+```python
+t[0] = 10
+```
+
+Error.
+
+---
+
+### Mutable Objects Inside Tuple
+
+```python
+t = ([1,2], [3,4])
+```
+
+Allowed:
+
+```python
+t[0].append(5)
+```
+
+---
+
+## Practice
+
+1. Tuple Unpacking
+2. Variable Swap
+3. Multiple Return Values
+4. Nested Tuple Traversal
+5. Manual Min/Max
+
+---
+
+# Sets
+
+## Definition
+
+Unordered collection of unique elements.
+
+```python
+s = {1,2,3}
+```
+
+---
+
+## Why Sets Matter
+
+Used for:
+
+* Fast lookup
+* Duplicate removal
+* Set operations
+* Membership testing
+
+---
+
+## Empty Set
+
+Correct:
+
+```python
+s = set()
+```
+
+Incorrect:
+
+```python
+s = {}
+```
+
+Creates dictionary.
+
+---
+
+## Duplicate Removal
+
+```python
+{1,2,2,3}
+```
+
+Becomes:
+
+```python
+{1,2,3}
+```
+
+---
+
+## Membership
+
+```python
+if 5 in s:
+```
+
+Very fast.
+
+---
+
+## Iteration
+
+```python
+for item in s:
+    print(item)
+```
+
+---
+
+## Set Methods
+
+### add()
+
+Insert element.
+
+```python
+s.add(10)
+```
+
+---
+
+### remove()
+
+Remove element.
+
+```python
+s.remove(10)
+```
+
+Raises error if missing.
+
+---
+
+### discard()
+
+Safe remove.
+
+```python
+s.discard(10)
+```
+
+---
+
+### pop()
+
+Remove arbitrary element.
+
+```python
+s.pop()
+```
+
+---
+
+### clear()
+
+Remove everything.
+
+```python
+s.clear()
+```
+
+---
+
+## Set Operations
+
+Assume:
+
+```python
+A = {1,2,3}
+B = {3,4,5}
+```
+
+---
+
+### Union
+
+All unique elements.
+
+```python
+A | B
+```
+
+or
+
+```python
+A.union(B)
+```
+
+---
+
+### Intersection
+
+Common elements.
+
+```python
+A & B
+```
+
+---
+
+### Difference
+
+Elements in A but not B.
+
+```python
+A - B
+```
+
+---
+
+### Symmetric Difference
+
+Non-common elements.
+
+```python
+A ^ B
+```
+
+---
+
+## Set Relationships
+
+### Subset
+
+All elements of A exist in B.
+
+```python
+A.issubset(B)
+```
+
+or
+
+```python
+A <= B
+```
+
+Alternative logic:
+
+```python
+A - B == set()
+```
+
+---
+
+### Proper Subset
+
+```python
+A < B
+```
+
+---
+
+### Disjoint
+
+No common elements.
+
+```python
+A.isdisjoint(B)
+```
+
+Alternative logic:
+
+```python
+A & B == set()
+```
+
+---
+
+## Tricky Points
+
+### Elements Must Be Immutable
+
+Valid:
+
+```python
+{1, "hello", (1,2)}
+```
+
+Invalid:
+
+```python
+{[1,2]}
+```
+
+---
+
+### Sets Have No Indexing
+
+```python
+s[0]
+```
+
+Error.
+
+---
+
+## Practice
+
+1. Remove Duplicates
+2. Unique Words Counter
+3. Common Elements
+4. Subset Check
+5. Disjoint Check
+
+---
+
+# Dictionaries
+
+## Definition
+
+Stores data as:
+
+```text
+key -> value
+```
+
+pairs.
+
+---
+
+## Why Dictionaries Matter
+
+Most important collection in Python.
+
+Used in:
+
+* APIs
+* JSON
+* Databases
+* Caching
+* AI preprocessing
+* Frequency counting
+
+---
+
+## Creation
+
+```python
+student = {
+    "name": "Raghava",
+    "age": 19
+}
+```
+
+---
+
+## Access Values
+
+```python
+student["name"]
+```
+
+---
+
+## Add Entry
+
+```python
+student["city"] = "Hyderabad"
+```
+
+---
+
+## Update Entry
+
+```python
+student["age"] = 20
+```
+
+---
+
+## Delete Entry
+
+```python
+del student["age"]
+```
+
+or
+
+```python
+student.pop("age")
+```
+
+---
+
+## Membership
+
+Checks keys only.
+
+```python
+"name" in student
+```
+
+---
+
+## Iteration
+
+### Keys
+
+```python
+for key in student:
+```
+
+---
+
+### Values
+
+```python
+for value in student.values():
+```
+
+---
+
+### Key + Value
+
+Most important.
+
+```python
+for key, value in student.items():
+```
+
+---
+
+## Dictionary Methods
+
+### keys()
+
+Return keys.
+
+```python
+student.keys()
+```
+
+---
+
+### values()
+
+Return values.
+
+```python
+student.values()
+```
+
+---
+
+### items()
+
+Return key-value pairs.
+
+```python
+student.items()
+```
+
+---
+
+### get()
+
+Safe access.
+
+```python
+student.get("name")
+```
+
+Missing key returns:
+
+```python
+None
+```
+
+instead of error.
+
+---
+
+### update()
+
+Merge or update values.
+
+```python
+student.update({"city": "Delhi"})
+```
+
+---
+
+### clear()
+
+Remove all entries.
+
+```python
+student.clear()
+```
+
+---
+
+## Frequency Counter Pattern
+
+Most important dictionary application.
+
+Traditional:
+
+```python
+freq = {}
+
+for item in data:
+    if item in freq:
+        freq[item] += 1
+    else:
+        freq[item] = 1
+```
+
+Pythonic:
+
+```python
+freq[item] = freq.get(item, 0) + 1
+```
+
+---
+
+## Dictionary Keys
+
+Keys must be immutable.
+
+Valid:
+
+```python
+{
+    "name": "Ravi",
+    1: "one",
+    (1,2): "tuple"
+}
+```
+
+Invalid:
+
+```python
+{
+    [1,2]: "list"
+}
+```
+
+---
+
+## Tricky Points
+
+### {} Creates Dictionary
+
+```python
+{}
+```
+
+Dictionary, not set.
+
+---
+
+### Membership Checks Keys
+
+```python
+"name" in student
+```
+
+Checks keys only.
+
+---
+
+### Fast Lookup
+
+```python
+student["name"]
+```
+
+Much faster than searching lists manually.
+
+---
+
+## Practice
+
+1. Student Dictionary
+2. Frequency Counter
+3. Word Frequency Counter
+4. Character Frequency Counter
+5. Topper Finder
+
+---
+
+
+
