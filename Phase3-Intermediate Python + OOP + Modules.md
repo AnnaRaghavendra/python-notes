@@ -1516,3 +1516,651 @@ After this topic you should be able to:
 * Raise your own exceptions
 * Understand Python's exception hierarchy
 * Build more reliable programs
+
+  ---
+
+  # Phase 3 — Modules
+
+---
+
+# Why Learn Modules?
+
+As programs grow larger, keeping everything inside one file becomes difficult.
+
+Instead of writing hundreds of lines in a single file, code can be split into multiple files based on responsibility.
+
+Benefits:
+
+* Better organization
+* Easier maintenance
+* Code reusability
+* Cleaner project structure
+* Easier debugging
+
+---
+
+# What is a Module?
+
+A module is simply:
+
+```text
+A Python file (.py)
+```
+
+Example:
+
+```text
+calculator.py
+```
+
+```python
+def add(a, b):
+    return a + b
+```
+
+The file itself is a module.
+
+---
+
+# Creating Your First Module
+
+## calculator.py
+
+```python
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+```
+
+## main.py
+
+```python
+import calculator
+
+print(calculator.add(10, 5))
+print(calculator.subtract(10, 5))
+```
+
+Output:
+
+```text
+15
+5
+```
+
+---
+
+# import Statement
+
+Syntax:
+
+```python
+import module_name
+```
+
+Example:
+
+```python
+import math
+```
+
+Use:
+
+```python
+math.sqrt(25)
+```
+
+Output:
+
+```text
+5.0
+```
+
+---
+
+# Why module_name.function_name ?
+
+When Python imports a module, it imports the entire module namespace.
+
+Example:
+
+```python
+import math
+```
+
+Access functions using:
+
+```python
+math.sqrt(25)
+math.factorial(5)
+```
+
+This avoids naming conflicts.
+
+---
+
+# from ... import ...
+
+Instead of:
+
+```python
+import math
+
+print(math.sqrt(25))
+```
+
+You can write:
+
+```python
+from math import sqrt
+
+print(sqrt(25))
+```
+
+Output:
+
+```text
+5.0
+```
+
+---
+
+# Import Multiple Functions
+
+```python
+from math import sqrt, factorial
+```
+
+Example:
+
+```python
+print(sqrt(16))
+print(factorial(5))
+```
+
+Output:
+
+```text
+4.0
+120
+```
+
+---
+
+# Import Everything
+
+```python
+from math import *
+```
+
+Example:
+
+```python
+print(sqrt(25))
+print(factorial(5))
+```
+
+---
+
+# Why Avoid import * ?
+
+Avoid:
+
+```python
+from module import *
+```
+
+Reasons:
+
+* Imports everything
+* Can overwrite existing names
+* Harder to understand code
+* Difficult to debug
+
+Prefer:
+
+```python
+import module
+```
+
+or
+
+```python
+from module import specific_function
+```
+
+---
+
+# Aliases
+
+Aliases provide shorter names.
+
+Syntax:
+
+```python
+import module_name as alias
+```
+
+Example:
+
+```python
+import math as m
+
+print(m.sqrt(25))
+```
+
+Output:
+
+```text
+5.0
+```
+
+---
+
+# Built-in Modules
+
+Python provides many built-in modules.
+
+## math
+
+```python
+import math
+
+print(math.sqrt(25))
+print(math.factorial(5))
+```
+
+---
+
+## random
+
+```python
+import random
+
+print(random.randint(1, 10))
+```
+
+---
+
+## datetime
+
+```python
+from datetime import datetime
+
+print(datetime.now())
+```
+
+---
+
+## json
+
+```python
+import json
+```
+
+Used for JSON file handling.
+
+---
+
+# Module Execution
+
+Consider:
+
+## test.py
+
+```python
+print("Hello")
+```
+
+Run:
+
+```bash
+python test.py
+```
+
+Output:
+
+```text
+Hello
+```
+
+---
+
+# The Special Variable: **name**
+
+Every Python file automatically receives a special variable:
+
+```python
+__name__
+```
+
+Example:
+
+```python
+print(__name__)
+```
+
+---
+
+# Running Directly
+
+File:
+
+```python
+print(__name__)
+```
+
+Run:
+
+```bash
+python test.py
+```
+
+Output:
+
+```text
+__main__
+```
+
+---
+
+# Importing
+
+If the same file is imported:
+
+```python
+import test
+```
+
+Output:
+
+```text
+test
+```
+
+The module name becomes the filename.
+
+---
+
+# **name** == "**main**"
+
+One of the most important Python patterns.
+
+Syntax:
+
+```python
+if __name__ == "__main__":
+    # code
+```
+
+Example:
+
+```python
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(10, 20))
+```
+
+---
+
+# Why Use It?
+
+Without:
+
+```python
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+```
+
+Importing the module executes:
+
+```python
+print(add(10, 20))
+```
+
+every time.
+
+---
+
+With:
+
+```python
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(10, 20))
+```
+
+The print statement runs only when the file is executed directly.
+
+---
+
+# Module Search Path
+
+When Python encounters:
+
+```python
+import calculator
+```
+
+it searches:
+
+1. Current folder
+2. Python standard library
+3. Installed packages
+
+If not found:
+
+```text
+ModuleNotFoundError
+```
+
+occurs.
+
+---
+
+# Common Errors
+
+## ModuleNotFoundError
+
+Example:
+
+```python
+import calculator
+```
+
+Error:
+
+```text
+ModuleNotFoundError
+```
+
+Possible reasons:
+
+* Wrong filename
+* Wrong folder
+* Module does not exist
+
+---
+
+# Circular Import
+
+Avoid:
+
+```text
+module_a imports module_b
+module_b imports module_a
+```
+
+This can create import issues.
+
+---
+
+# Best Practices
+
+* One responsibility per module
+* Use meaningful file names
+* Avoid `import *`
+* Use aliases when appropriate
+* Use `if __name__ == "__main__":`
+* Keep modules focused and small
+
+---
+
+# Practice Questions
+
+## Familiarity
+
+### 1. Calculator Module
+
+Create:
+
+```text
+calculator.py
+```
+
+Functions:
+
+```python
+add()
+subtract()
+```
+
+Import and use them.
+
+---
+
+### 2. Greeting Module
+
+Create:
+
+```text
+greetings.py
+```
+
+Function:
+
+```python
+say_hello()
+```
+
+Import and call it.
+
+---
+
+### 3. Use math Module
+
+Practice:
+
+```python
+sqrt()
+factorial()
+pow()
+```
+
+---
+
+## Important
+
+### 4. Use from ... import ...
+
+Import only:
+
+```python
+sqrt
+```
+
+and use it.
+
+---
+
+### 5. Use Aliases
+
+Import:
+
+```python
+math as m
+```
+
+Use:
+
+```python
+m.sqrt()
+m.factorial()
+```
+
+---
+
+### 6. Observe **name**
+
+Create a file that prints:
+
+```python
+print(__name__)
+```
+
+Run directly.
+
+Then import it from another file.
+
+Observe the difference.
+
+---
+
+## Useful
+
+### 7. String Utility Module
+
+Create:
+
+```text
+string_utils.py
+```
+
+Functions:
+
+```python
+count_vowels()
+reverse_string()
+is_palindrome()
+```
+
+Import and test them.
+
+---
+
+# Quick Revision
+
+```text
+Module
+→ Python file
+
+import module
+
+from module import function
+
+import module as alias
+
+Avoid:
+from module import *
+
+Special Variable:
+__name__
+
+Important Pattern:
+if __name__ == "__main__":
+
+Built-in Modules:
+math
+random
+datetime
+json
+```
+
