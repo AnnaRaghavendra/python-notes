@@ -2164,3 +2164,550 @@ datetime
 json
 ```
 
+---
+
+# Phase 3 — Packages
+
+---
+
+# Why Learn Packages?
+
+As projects grow, the number of modules increases.
+
+Instead of:
+
+```text
+calculator.py
+string_utils.py
+json_utils.py
+file_utils.py
+date_utils.py
+```
+
+all being placed in one folder, related modules can be grouped together.
+
+Packages provide:
+
+* Better organization
+* Cleaner project structure
+* Easier maintenance
+* Better scalability
+* Logical grouping of modules
+
+---
+
+# What is a Package?
+
+A package is:
+
+```text
+A folder containing Python modules.
+```
+
+Example:
+
+```text
+utils/
+
+├── __init__.py
+├── calculator.py
+├── string_utils.py
+```
+
+Here:
+
+```text
+utils
+```
+
+is a package.
+
+---
+
+# Module vs Package
+
+| Feature   | Module        | Package           |
+| --------- | ------------- | ----------------- |
+| Meaning   | Python File   | Folder of Modules |
+| Extension | .py           | Folder            |
+| Example   | calculator.py | utils/            |
+| Purpose   | Store Code    | Organize Modules  |
+
+---
+
+# Package Structure
+
+Example:
+
+```text
+project/
+
+├── main.py
+
+└── utils/
+    ├── __init__.py
+    ├── calculator.py
+    └── string_utils.py
+```
+
+---
+
+# The **init**.py File
+
+## What is it?
+
+A special Python file placed inside a package.
+
+Example:
+
+```text
+utils/
+
+├── __init__.py
+├── calculator.py
+└── string_utils.py
+```
+
+---
+
+## Historical Purpose
+
+Originally:
+
+```text
+Folder + __init__.py
+=
+Python Package
+```
+
+Python used this file to recognize packages.
+
+---
+
+## Modern Python
+
+Modern Python versions can work without it in many cases.
+
+However:
+
+```text
+Using __init__.py is still recommended.
+```
+
+---
+
+# Why **init**.py Exists
+
+The real purpose is:
+
+```text
+Package Initialization
+```
+
+When a package is imported:
+
+```python
+import utils
+```
+
+Python executes:
+
+```python
+utils/__init__.py
+```
+
+first.
+
+---
+
+# Package Initialization Example
+
+## **init**.py
+
+```python
+print("Package Loaded")
+```
+
+## main.py
+
+```python
+import utils
+```
+
+Output:
+
+```text
+Package Loaded
+```
+
+---
+
+# Exporting Functions
+
+Suppose:
+
+## calculator.py
+
+```python
+def add(a, b):
+    return a + b
+```
+
+---
+
+## **init**.py
+
+```python
+from .calculator import add
+```
+
+Now:
+
+```python
+from utils import add
+```
+
+works.
+
+Instead of:
+
+```python
+from utils.calculator import add
+```
+
+---
+
+# Package-Level Variables
+
+## **init**.py
+
+```python
+VERSION = "1.0"
+```
+
+Use:
+
+```python
+import utils
+
+print(utils.VERSION)
+```
+
+Output:
+
+```text
+1.0
+```
+
+---
+
+# Importing from Packages
+
+## Import Specific Function
+
+```python
+from utils.calculator import add
+```
+
+Use:
+
+```python
+print(add(10, 20))
+```
+
+---
+
+## Import Entire Module
+
+```python
+import utils.calculator
+```
+
+Use:
+
+```python
+print(utils.calculator.add(10, 20))
+```
+
+---
+
+## Import Multiple Functions
+
+```python
+from utils.calculator import add, subtract
+```
+
+---
+
+# Aliases
+
+```python
+import utils.calculator as calc
+```
+
+Use:
+
+```python
+calc.add(10, 20)
+```
+
+---
+
+# Relative Imports
+
+Inside packages you may see:
+
+```python
+from .calculator import add
+```
+
+The dot means:
+
+```text
+Current Package
+```
+
+Example:
+
+```python
+from .string_utils import reverse
+```
+
+means:
+
+```text
+Import reverse from string_utils.py
+inside the same package.
+```
+
+---
+
+# Nested Packages
+
+Packages can contain packages.
+
+Example:
+
+```text
+app/
+
+├── __init__.py
+
+├── services/
+│   ├── __init__.py
+│   ├── auth.py
+│   └── email.py
+```
+
+Import:
+
+```python
+from services.auth import login
+```
+
+---
+
+# Package Search
+
+When Python encounters:
+
+```python
+import utils
+```
+
+it searches:
+
+1. Current Project Folder
+2. Python Standard Library
+3. Installed Packages
+
+If not found:
+
+```text
+ModuleNotFoundError
+```
+
+occurs.
+
+---
+
+# Common Errors
+
+## ModuleNotFoundError
+
+Example:
+
+```python
+import utils
+```
+
+Error:
+
+```text
+ModuleNotFoundError
+```
+
+Possible reasons:
+
+* Wrong folder name
+* Wrong module name
+* Package not found
+
+---
+
+## Circular Imports
+
+Avoid:
+
+```text
+module_a imports module_b
+
+module_b imports module_a
+```
+
+This can cause import issues.
+
+---
+
+# Best Practices
+
+* Group related modules together
+* Use meaningful package names
+* Keep packages focused
+* Use `__init__.py`
+* Avoid deeply nested structures initially
+* Avoid circular imports
+
+---
+
+# Practice Questions
+
+## Familiarity
+
+### 1
+
+Create:
+
+```text
+utils/
+
+├── __init__.py
+├── calculator.py
+```
+
+Import a function from calculator.py.
+
+---
+
+### 2
+
+Create:
+
+```text
+helpers/
+
+├── __init__.py
+├── greetings.py
+```
+
+Import and call a function.
+
+---
+
+### 3
+
+Import an entire module from a package.
+
+---
+
+## Important
+
+### 4
+
+Use:
+
+```python
+from package.module import function
+```
+
+---
+
+### 5
+
+Use alias imports:
+
+```python
+import package.module as alias
+```
+
+---
+
+### 6
+
+Create a variable inside:
+
+```python
+__init__.py
+```
+
+and access it.
+
+---
+
+## Useful
+
+### 7
+
+Use:
+
+```python
+from .module import function
+```
+
+inside a package.
+
+Observe how relative imports work.
+
+---
+
+# Quick Revision
+
+```text
+Module
+→ Python File
+
+Package
+→ Folder of Modules
+
+Special File
+→ __init__.py
+
+Uses of __init__.py
+
+1. Package Initialization
+
+2. Export Functions
+
+3. Package Variables
+
+4. Startup Code
+
+Import Examples
+
+from package.module import function
+
+import package.module
+
+Relative Import
+
+from .module import function
+
+Package Benefits
+
+Organization
+Maintainability
+Scalability
+Code Reuse
+```
+
+
